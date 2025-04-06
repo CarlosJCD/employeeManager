@@ -1,0 +1,19 @@
+# Maven
+target/
+*.log
+*.class
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# WildFly logs/temp
+standalone/tmp/
+standalone/log/
