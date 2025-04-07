@@ -127,6 +127,18 @@
                     </execution>
                 </executions>
             </plugin>
+
+        <plugin>
+            <groupId>org.wildfly.plugins</groupId>
+            <artifactId>wildfly-maven-plugin</artifactId>
+            <version>4.0.0.Final</version>
+            <configuration>
+                <hostname>localhost</hostname>
+                <port>9990</port>
+                <username>admin</username> <!-- cambia si usas otro -->
+                <password>admin</password> <!-- cambia si usas otro -->
+            </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
