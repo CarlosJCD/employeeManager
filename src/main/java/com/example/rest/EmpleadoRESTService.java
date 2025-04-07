@@ -1,6 +1,8 @@
 package com.example.rest;
 
 import com.example.model.Empleado;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
