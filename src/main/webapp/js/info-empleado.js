@@ -64,7 +64,7 @@ async function cargarTareas() {
       <p>Completada: ${tarea.completada ? "Sí" : "No"}</p>
       ${!tarea.completada
         ? `<button class="button complete" onclick="completarTarea(${tarea.id})">Completar</button>`
-        : ""}
+        : `<p>Fecha de Termino: ${tarea.fechaTermino}</p>`}
     `;
     contenedor.appendChild(div);
   });
@@ -95,8 +95,8 @@ async function asignarTarea() {
 }
 
 async function completarTarea(idTarea) {
-  await fetch(`http://localhost:8080/empleado-app/api/tareas/completar/${idTarea}`, {
-    method: "POST"
+  await fetch(`${REST_ENDPOINT + idTarea}/completar`, {
+    method: "PUT"
   });
   cargarTareas();
 }
@@ -104,3 +104,5 @@ async function completarTarea(idTarea) {
 // Inicializar
 cargarEmpleado();
 cargarTareas();
+
+document.getElementById("editarDatos").addEventListener("click", ()=>{ window.location.href = `editar-empleado.html?id=${empleadoId}` } )

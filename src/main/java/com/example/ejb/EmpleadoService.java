@@ -4,6 +4,7 @@ import com.example.model.Empleado;
 import jakarta.ejb.Stateless;
 import jakarta.jws.WebService;
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 
 @Stateless
 public class EmpleadoService {
@@ -15,12 +16,13 @@ public class EmpleadoService {
         return e;
     }
 
+    @Transactional
     public void actualizar(Empleado e) {
-         Empleado empleado = em.find(Empleado.class, id);
+         Empleado empleado = em.find(Empleado.class, e.getId());
         if (empleado != null) {
-            empleado.setId(e.getId);
-            empleado.setNombre(e.getNombre);
-            empleado.setPuesto(e.getPuesto);
+            empleado.setId(e.getId());
+            empleado.setNombre(e.getNombre());
+            empleado.setPuesto(e.getPuesto());
             
             em.merge(empleado);
         } else {
@@ -32,6 +34,4 @@ public class EmpleadoService {
         return em.find(Empleado.class, id);
     }
 
-    // public List<Empleado> listar() {
-    // }
 }

@@ -1,14 +1,13 @@
 package com.example.ejb;
 
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
 
 import com.example.model.Empleado;
 import com.example.model.Tarea;
 import jakarta.ejb.Stateful;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 @Stateful
 public class TareaService {
@@ -21,16 +20,9 @@ public class TareaService {
         this.empleado = e;
     }
 
-    public void agregarTarea(String descripcion) {
-        // Tarea t = new Tarea();
-        // t.setDescripcion(descripcion);
-        // t.setCompletada(false);
-        // t.setEmpleado(empleado);
-        // em.persist(t);
-    }
-
-    public Tarea completarTarea(Tarea tarea) {
-        Tarea tareaExistente = em.find(Tarea.class, tarea.getId());
+    @Transactional
+    public Tarea completarTarea(Long id) {
+        Tarea tareaExistente = em.find(Tarea.class, id);
         
         if (tareaExistente != null) {
             if(tareaExistente.isCompletada()) {
@@ -46,8 +38,4 @@ public class TareaService {
             throw new IllegalArgumentException("La tarea no existe");
         }
     }
-
-    // public List<Tarea> obtenerTareas() {
-
-    // }
 }

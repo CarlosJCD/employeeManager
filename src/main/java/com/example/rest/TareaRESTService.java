@@ -27,7 +27,6 @@ public class TareaRESTService {
 
     @POST
     @Path("asignar")
-    @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     public void asignar(Tarea tarea) {
@@ -42,15 +41,8 @@ public class TareaRESTService {
     }
 
     @GET
-    @Path("{id}")
-    public List<Tarea> obtenerTareasPendientes(@PathParam("id") Long empleadoId) {
-        return em.createQuery("SELECT t FROM Tarea t WHERE t.empleado.id = :empleadoId", Tarea.class)
-                 .setParameter("empleadoId", empleadoId)
-                 .getResultList();
-    }
-
-    @GET
     @Path("{empleadoId}")
+    @Consumes(MediaType.WILDCARD)
     @Produces(MediaType.APPLICATION_JSON)
     public List<Tarea> obtenerTodasLasTareas(@PathParam("empleadoId") Long empleadoId) {
         return em.createQuery("SELECT t FROM Tarea t WHERE t.empleado.id = :empleadoId", Tarea.class)
@@ -60,10 +52,9 @@ public class TareaRESTService {
 
     @PUT
     @Path("{id}/completar")
-    public Response completarTarea(@PathParam("id") Long id, Tarea tarea) {
+    public Response completarTarea(@PathParam("id") Long id) {
         try {
-            tarea.setId(id);
-            tarea = tareaService.completarTarea(tarea);
+            Tarea tarea = tareaService.completarTarea(id);
             return Response.ok(tarea).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)

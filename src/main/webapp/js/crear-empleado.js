@@ -18,7 +18,6 @@ document.getElementById('formEmpleado').addEventListener('submit', async (e) => 
         });
         console.log(crearEmpleadoSOAPRequest)
         
-        alert("Submit")
         const xmlResponse = await response.text();
         
         console.log(xmlResponse);
