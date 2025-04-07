@@ -1,8 +1,10 @@
 package com.example.model;
 
 import jakarta.persistence.*;
-import java.io.Serializable;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
+import java.io.Serializable;
+@XmlRootElement // SOAP pueda convertirla a xml
 @Entity
 public class Empleado implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
