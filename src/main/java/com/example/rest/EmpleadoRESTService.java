@@ -9,9 +9,11 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class EmpleadoRESTService {
 
+    @PersistenceContext(unitName = "MyPU")
+    private EntityManager em;
 
-    // @GET 
-    // public List<Empleado> listar() {
-        
-    // }
+    @GET
+    public List<Empleado> listar() {
+        return em.createQuery("SELECT e FROM Empleado e", Empleado.class).getResultList();
+    }
 }
