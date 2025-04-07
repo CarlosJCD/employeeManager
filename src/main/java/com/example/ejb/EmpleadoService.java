@@ -16,7 +16,16 @@ public class EmpleadoService {
     }
 
     public void actualizar(Empleado e) {
-        // em.merge(e);
+         Empleado empleado = em.find(Empleado.class, id);
+        if (empleado != null) {
+            empleado.setId(e.getId);
+            empleado.setNombre(e.getNombre);
+            empleado.setPuesto(e.getPuesto);
+            
+            em.merge(empleado);
+        } else {
+            throw new IllegalArgumentException("Empleado no encontrado");
+        }
     }
 
     public Empleado buscar(Long id) {
