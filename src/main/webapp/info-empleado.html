@@ -57,6 +57,15 @@
                 cursor: pointer;
                 margin-bottom: 1.5rem;
             }
+
+            #editarDatos{
+                color:#3498db;
+            }
+
+            #editarDatos:hover{
+                text-decoration: underline;
+                cursor: pointer;
+            }
         </style>
     </head>
 
@@ -64,13 +73,14 @@
         <h1>Detalles del Empleado</h1>
 
         <div class="buttonContainer">
-            <button onclick="window.location.href='index.html'"> <- Regresar a la pagina principal </button>
+            <button onclick="window.location.href='index.html'"> ← Regresar a la pagina principal </button>
         </div>
 
         <div id="empleadoDatos" class="card">
             <h3>Nombre: <span id="nombre">John Doe</span></h3>
             <p style="font-weight: 700;">Puesto: <span style="font-weight: 500;" id="puesto">CEO</span></p>
             <p style="font-weight: 700;">ID: <span style="font-weight: 500;" id="idEmpleado">-1</span></p>
+            <p id="editarDatos">Editar Datos</p>
         </div>
 
         <div>

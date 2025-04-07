@@ -1,8 +1,8 @@
+com/example/config/JAXRSConfig.class
 com/example/model/Tarea.class
 com/example/ejb/EmpleadoService.class
 com/example/soap/EmpleadoSOAPService.class
 com/example/ejb/TareaService.class
-com/example/rest/RestApplication.class
 com/example/rest/EmpleadoRESTService.class
 com/example/rest/TareaRESTService.class
 com/example/model/Empleado.class

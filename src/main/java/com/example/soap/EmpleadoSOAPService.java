@@ -10,6 +10,9 @@ import jakarta.jws.WebResult;
 import jakarta.jws.WebService;
 import jakarta.jws.soap.SOAPBinding;
 import jakarta.jws.soap.SOAPBinding.Style;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 
 @WebService(
@@ -19,11 +22,12 @@ import jakarta.jws.soap.SOAPBinding.Style;
 @SOAPBinding(style = Style.DOCUMENT)
 public class EmpleadoSOAPService {
 
-    @EJB
-    private EmpleadoService empleadoService;
+    @PersistenceContext(unitName = "MyPU")
+    private EntityManager em;
 
     @WebMethod(operationName = "registrarEmpleado")
     @WebResult(name = "empleado")
+    @Transactional
     public Empleado registrarEmpleado(
             @WebParam(name = "nombre") String nombre,
             @WebParam(name = "puesto") String puesto) {
@@ -31,13 +35,16 @@ public class EmpleadoSOAPService {
         Empleado empleado = new Empleado();
         empleado.setNombre(nombre);
         empleado.setPuesto(puesto);
+        
+        em.persist(empleado);
 
-        return empleadoService.registrar(empleado);
+        return empleado;
     }
 
     @WebMethod(operationName = "obtenerEmpleado")
     @WebResult(name = "empleado")
+    @Transactional
     public Empleado obtenerEmpleado(@WebParam(name = "id") Long id) {
-        return empleadoService.buscar(id);
+        return em.find(Empleado.class, id);
     }
 }
