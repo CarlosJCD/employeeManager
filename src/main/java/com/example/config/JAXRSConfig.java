@@ -1,9 +1,8 @@
-package com.example.config;  // Ubicación de tu clase de configuración
+package com.example.config;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 
-@ApplicationPath("api")  // Define el prefijo base para todas las rutas de la API
+@ApplicationPath("api") 
 public class JAXRSConfig extends Application {
-    // No es necesario añadir más código, solo esta anotación es suficiente
 }

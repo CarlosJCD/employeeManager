@@ -11,7 +11,6 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
-import java.time.LocalDate;
 import java.util.List;
 import jakarta.ws.rs.core.Response;
 
@@ -35,7 +34,7 @@ public class TareaRESTService {
         Empleado empleado = em.find(Empleado.class, tarea.getEmpleado().getId());
         if (empleado != null) {
             tarea.setEmpleado(empleado);
-            tarea.setFechaTermino(null); // Asignar fecha de término a 7 días
+            tarea.setFechaTermino(null);
             em.persist(tarea);  
         } else {
             throw new NotFoundException("Empleado no encontrado");
@@ -54,7 +53,6 @@ public class TareaRESTService {
     @Path("{empleadoId}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Tarea> obtenerTodasLasTareas(@PathParam("empleadoId") Long empleadoId) {
-        // Consulta para obtener todas las tareas de un empleado sin importar si están completadas
         return em.createQuery("SELECT t FROM Tarea t WHERE t.empleado.id = :empleadoId", Tarea.class)
                 .setParameter("empleadoId", empleadoId)
                 .getResultList();
