@@ -4,6 +4,7 @@ import com.example.model.Empleado;
 import com.example.model.Tarea;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
@@ -20,6 +21,7 @@ public class TareaRESTService {
     @POST
     @Path("asignar")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
     public void asignar(Tarea tarea) {
         Empleado empleado = em.find(Empleado.class, tarea.getEmpleado().getId());
         if (empleado != null) {
@@ -32,9 +34,9 @@ public class TareaRESTService {
 
     // Consultar tareas pendientes de x empleado
     @GET
-    @Path("pendientes/{id}")
+    @Path("{id}")
     public List<Tarea> obtenerTareasPendientes(@PathParam("id") Long empleadoId) {
-        return em.createQuery("SELECT t FROM Tarea t WHERE t.empleado.id = :empleadoId AND t.completada = false", Tarea.class)
+        return em.createQuery("SELECT t FROM Tarea t WHERE t.empleado.id = :empleadoId", Tarea.class)
                  .setParameter("empleadoId", empleadoId)
                  .getResultList();
     }

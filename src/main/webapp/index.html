@@ -3,93 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Gestión de Empleados</title>
-  <style>
-    body { margin: 0; font-family: sans-serif; display: flex; }
-    .sidebar {
-      width: 220px;
-      background: #2c3e50;
-      color: white;
-      height: 100vh;
-      padding: 1rem;
-      box-sizing: border-box;
-    }
-    .sidebar a {
-      display: block;
-      margin: 1rem 0;
-      color: white;
-      text-decoration: none;
-    }
-    .sidebar a:hover {
-      text-decoration: underline;
-    }
-    .main {
-      flex: 1;
-      padding: 2rem;
-      background: #ecf0f1;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 0.5rem;
-      text-align: left;
-    }
-    th {
-      background: #34495e;
-      color: white;
-    }
-  </style>
+
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="sidebar">
-    <h2>Menú</h2>
-    <a href="crear-empleado.html">Crear Empleado</a>
-    <a href="crear-asignar-tarea.html">Crear y Asignar Tarea</a>
-    <a href="info-empleado.html">Info de Empleado</a>
-    <a href="completar-tarea.html">Completar Tarea</a>
-  </div>
 
-  <div class="main">
-    <h1>Lista de Empleados</h1>
-    <table id="tabla-empleados">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Puesto</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Datos dinámicos -->
-      </tbody>
-    </table>
-  </div>
+    
+    <div class="main">
+        <h1>Administrador de Empleados</h1>
 
-  <script>
-    async function cargarEmpleados() {
-      try {
-        const res = await fetch('http://localhost:8080/employee-manager/api/empleados');
-        const empleados = await res.json();
+        
+        <h2>Empleados</h2>
+        <div class="buttonContainer">
+            <button onclick="window.location.href='crear-empleado.html'"> + Registrar Empleado </button>
+        </div>
+        <div class="cards-container" id="empleados-container">
+        <!-- Tarjetas de empleados -->
+        </div>
+    </div>
 
-        const tbody = document.querySelector("#tabla-empleados tbody");
-        empleados.forEach(emp => {
-          const fila = document.createElement("tr");
-          fila.innerHTML = `
-            <td>${emp.id}</td>
-            <td>${emp.nombre}</td>
-            <td>${emp.puesto}</td>
-          `;
-          tbody.appendChild(fila);
-        });
-      } catch (err) {
-        alert("Error cargando empleados: " + err);
-      }
-    }
-
-    cargarEmpleados();
-  </script>
+  <script src="js/index.js"></script>
 </body>
 </html>
