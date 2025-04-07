@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://soap.example.com/" xmlns:tns="http://soap.example.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="empleado" type="tns:empleado"/>
+
+  <xs:element name="obtenerEmpleado" type="tns:obtenerEmpleado"/>
+
+  <xs:element name="obtenerEmpleadoResponse" type="tns:obtenerEmpleadoResponse"/>
+
+  <xs:element name="registrarEmpleado" type="tns:registrarEmpleado"/>
+
+  <xs:element name="registrarEmpleadoResponse" type="tns:registrarEmpleadoResponse"/>
+
+  <xs:complexType name="obtenerEmpleado">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="obtenerEmpleadoResponse">
+    <xs:sequence>
+      <xs:element name="empleado" type="tns:empleado" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="empleado">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="puesto" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registrarEmpleado">
+    <xs:sequence>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="puesto" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registrarEmpleadoResponse">
+    <xs:sequence>
+      <xs:element name="empleado" type="tns:empleado" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
